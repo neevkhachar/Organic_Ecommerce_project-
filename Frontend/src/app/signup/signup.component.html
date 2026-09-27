@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Account Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            display: flex;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: container-appear 0.8s ease-out forwards;
+        }
+
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            padding: 40px;
+            color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .left-panel h1 {
+            font-size: 32px;
+            margin-bottom: -5px;
+            animation: slide-up 0.7s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.3s;
+        }
+
+        .left-panel p {
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.6;
+            animation: slide-up 0.7s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 10%;
+            animation-delay: 2s;
+            animation-duration: 10s;
+        }
+
+        .circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            left: 60%;
+            animation-delay: 4s;
+            animation-duration: 6s;
+        }
+
+        .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            left: 40%;
+            animation-delay: 1s;
+            animation-duration: 12s;
+        }
+
+        .signup-form {
+            flex: 1.3;
+            background: white;
+            padding: 40px;
+            position: relative;
+        }
+
+        .signup-form h2 {
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            animation: slide-in-right 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: slide-in-right 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .form-group:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .form-group:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #6e8efb;
+            box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.2);
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-group .input-icon {
+            position: absolute;
+            top: 38px;
+            right: 15px;
+            color: #999;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 38px;
+            right: 15px;
+            cursor: pointer;
+            color: #999;
+            user-select: none;
+        }
+
+        .password-toggle:hover {
+            color: #6e8efb;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            animation: slide-in-right 0.6s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.6s;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+            accent-color: #6e8efb;
+        }
+
+        .checkbox-group label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 12px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            animation: slide-in-right 0.6s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.7s;
+        }
+
+        .signup-btn:hover {
+            background: linear-gradient(135deg, #5d7df9, #9860e0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 14px;
+            animation: fade-in 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+
+        .login-link a {
+            color: #6e8efb;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #a777e3;
+            text-decoration: underline;
+        }
+
+        .social-signup {
+            margin-top: 30px;
+            text-align: center;
+            animation: fade-in 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.9s;
+        }
+
+        .social-signup p {
+            color: #666;
+            margin-bottom: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-signup p::before,
+        .social-signup p::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .social-signup p span {
+            padding: 0 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f3f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon.facebook {
+            background: #3b5998;
+            color: white;
+        }
+
+        .social-icon.google {
+            background: #db4437;
+            color: white;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+            color: white;
+        }
+
+        @keyframes container-appear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in-right {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                max-width: 400px;
+                margin: 20px;
+            }
+
+            .left-panel {
+                padding: 30px 20px;
+            }
+
+            .signup-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form [formGroup]="signupform" (ngSubmit)="signupsubmit(signupform.value)">
+        <div class="container">
+            <div class="left-panel">
+                <div class="circles">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <h1>Welcome to our community!</h1>
+                <p>Join thousands of users and access premium features, personalized content, and exclusive offers.
+                    Create your account today and start your journey with us.</p>
+            </div>
+            <div class="signup-form">
+                <h2>Create an Account</h2>
+                
+                <div style="max-height: 500px; overflow-y: auto; padding-right: 15px;">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" formControlName="name" placeholder="Enter your full name" >
+                        <small *ngIf="signupform.get('name')?.invalid && signupform.get('name')?.touched" style="color: #e53e3e; font-size: 12px; margin-top: 5px; display: block;">
+                            Name is required (min 3 chars).
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" formControlName="email" placeholder="Enter your email" >
+                        <small *ngIf="signupform.get('email')?.invalid && signupform.get('email')?.touched" style="color: #e53e3e; font-size: 12px; margin-top: 5px; display: block;">
+                            Valid email is required.
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" formControlName="password" placeholder="Create a password (min 6 chars)" >
+                        <span class="password-toggle">👁️</span>
+                        <small *ngIf="signupform.get('password')?.invalid && signupform.get('password')?.touched" style="color: #e53e3e; font-size: 12px; margin-top: 5px; display: block;">
+                            Password must be at least 6 characters.
+                        </small>
+                    </div>
+                    
+                    <div formGroupName="address">
+                        <h4 style="margin-bottom: 15px; color: #555;">Shipping Address</h4>
+                        
+                        <div class="form-group">
+                            <label>Street</label>
+                            <input type="text" formControlName="street" placeholder="Street address" >
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label>City</label>
+                                <input type="text" formControlName="city" placeholder="City" >
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>State</label>
+                                <input type="text" formControlName="state" placeholder="State" >
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label>Country</label>
+                                <input type="text" formControlName="country" placeholder="Country" >
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Pincode</label>
+                                <input type="text" formControlName="pincode" placeholder="6 digits" >
+                                <small *ngIf="signupform.get('address.pincode')?.invalid && signupform.get('address.pincode')?.touched" style="color: #e53e3e; font-size: 12px; display: block;">
+                                    Must be 6 digits.
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" formControlName="phone" placeholder="10 digit phone number" >
+                            <small *ngIf="signupform.get('address.phone')?.invalid && signupform.get('address.phone')?.touched" style="color: #e53e3e; font-size: 12px; display: block;">
+                                Must be 10 digits.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
+                    </div>
+                    
+                    <button class="signup-btn" type="submit" [disabled]="isLoading">
+                        <span *ngIf="!isLoading">Sign Up</span>
+                        <span *ngIf="isLoading">Creating Account...</span>
+                    </button>
+                    
+                    <div class="login-link">
+                        Already have an account? <a routerLink="../login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

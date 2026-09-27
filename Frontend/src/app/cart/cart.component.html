@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="page-title">
+        <h1>Your Shopping Cart</h1>
+    </div>
+    
+    <div class="cart-container">
+        <div class="cart-items">
+            <!-- Empty Cart State -->
+            <div *ngIf="cartItems.length === 0" style="text-align: center; padding: 50px 20px;">
+                <h2 style="color: #4a5568; margin-bottom: 20px;">Your cart is empty</h2>
+                <p style="color: #718096; margin-bottom: 30px;">Looks like you haven't added anything to your cart yet.</p>
+                <a routerLink="/shop" class="checkout-btn" style="display: inline-block; width: auto; text-decoration: none; padding: 16px 40px;">Browse Products</a>
+            </div>
+
+            <!-- Cart Items List -->
+            <div *ngIf="cartItems.length > 0">
+                <div class="item" *ngFor="let item of cartItems">
+                    <div class="item-image">
+                        <img [src]="item.product.image || 'https://via.placeholder.com/120/f8f9fa/2d3748?text=Product'" [alt]="item.product.name">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-title">{{ item.product.name }}</h3>
+                        <p class="item-description">{{ item.product.description }}</p>
+                        <p class="item-price">${{ item.product.price | number:'1.2-2' }}</p>
+                        <div class="item-controls">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" (click)="updateQuantity(item.product._id, item.quantity - 1)">-</button>
+                                <span class="quantity">{{ item.quantity }}</span>
+                                <button class="quantity-btn" (click)="updateQuantity(item.product._id, item.quantity + 1)">+</button>
+                            </div>
+                            <button class="remove-btn" (click)="removeItem(item.product._id, item.product.name)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a routerLink="/shop" class="continue-shopping">Continue Shopping</a>
+        </div>
+        
+        <div class="cart-summary">
+            <h2 class="summary-title">Order Summary</h2>
+            <div class="summary-item">
+                <span>Subtotal ({{ cartItems.length }} items)</span>
+                <span>${{ subtotal | number:'1.2-2' }}</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping</span>
+                <span>{{ shipping === 0 ? 'Free' : ('$' + (shipping | number:'1.2-2')) }}</span>
+            </div>
+            <div class="summary-item">
+                <span>Estimated Tax (8%)</span>
+                <span>${{ tax | number:'1.2-2' }}</span>
+            </div>
+            <div class="summary-item total">
+                <span>Total</span>
+                <span class="price">${{ total | number:'1.2-2' }}</span>
+            </div>
+            
+            <button class="checkout-btn" 
+                    [disabled]="cartItems.length === 0 || isCheckingOut" 
+                    [style.opacity]="cartItems.length === 0 ? 0.5 : 1"
+                    (click)="checkout()">
+                <span *ngIf="!isCheckingOut">Proceed to Checkout</span>
+                <span *ngIf="isCheckingOut">Placing Order...</span>
+            </button>
+        </div>
+    </div>
+</div>

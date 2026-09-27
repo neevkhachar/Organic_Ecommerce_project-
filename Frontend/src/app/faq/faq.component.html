@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated FAQ Template</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5faf5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c5e3e;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .faq-container {
+            margin-bottom: 20px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: #fff;
+            color: #2c5e3e;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 20px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active {
+            background-color: #f8faf8;
+        }
+        
+        .faq-question.active::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            background-color: #f8faf8;
+            padding: 0 20px;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .faq-answer.show {
+            max-height: 500px;
+            padding: 20px;
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 2px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .highlight {
+            animation: pulse 0.5s ease-in-out;
+            background-color: #e8f5e9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search questions...">
+            <div class="search-icon">🔍</div>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">What payment methods do you accept?</div>
+                <div class="faq-answer">
+                    <p>We accept all major credit cards including Visa, MasterCard, American Express, and Discover. We also support payments through PayPal, Apple Pay, and Google Pay for your convenience.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long does shipping take?</div>
+                <div class="faq-answer">
+                    <p>Standard shipping typically takes 3-5 business days within the continental US. Express shipping options are available at checkout for 1-2 day delivery. International shipping times vary by location but usually range from 7-14 business days.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is your return policy?</div>
+                <div class="faq-answer">
+                    <p>We offer a 30-day return policy for all unused and unopened products in their original packaging. For opened products, we offer a 14-day return window. Please note that shipping costs for returns are the responsibility of the customer unless the return is due to our error.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer international shipping?</div>
+                <div class="faq-answer">
+                    <p>Yes, we ship to over 100 countries worldwide. International shipping rates are calculated at checkout based on destination, weight, and shipping method selected. Please note that customers are responsible for any import duties or taxes that may apply in their country.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I track my order?</div>
+                <div class="faq-answer">
+                    <p>Once your order ships, you will receive a confirmation email with tracking information. You can also log into your account on our website to track the status of your order in real-time. If you have any questions about your shipment, please contact our customer service team with your order number.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="no-results">No matching questions found. Please try a different search term.</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle FAQ toggling
+            const questions = document.querySelectorAll('.faq-question');
+            
+            questions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = question.classList.contains('active');
+                    
+                    // Close all questions first
+                    questions.forEach(q => {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('show');
+                    });
+                    
+                    // If it wasn't active before, open it
+                    if (!isActive) {
+                        question.classList.add('active');
+                        answer.classList.add('show');
+                        
+                        // Apply animation to newly opened answer
+                        answer.style.animation = 'fadeIn 0.4s ease-out forwards';
+                        setTimeout(() => {
+                            answer.style.animation = '';
+                        }, 400);
+                    }
+                });
+            });
+            
+            // Handle search functionality
+            const searchInput = document.querySelector('.search-input');
+            const faqItems = document.querySelectorAll('.faq-item');
+            const noResults = document.querySelector('.no-results');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                let resultsFound = false;
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        resultsFound = true;
+                        
+                        // Highlight matching items
+                        if (searchTerm.length > 0) {
+                            item.classList.add('highlight');
+                            setTimeout(() => {
+                                item.classList.remove('highlight');
+                            }, 500);
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                noResults.style.display = resultsFound ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

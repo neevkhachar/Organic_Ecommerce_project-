@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Category Details - Green Theme</title>
+        <style>
+                :root {
+                        --primary-green: #2e7d32;
+                        --light-green: #4caf50;
+                        --pale-green: #a5d6a7;
+                        --dark-green: #1b5e20;
+                        --accent-green: #00c853;
+                        --text-light: #f1f8e9;
+                        --text-dark: #1b5e20;
+                        --transition-speed: 0.3s;
+                }
+
+                * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+
+                body {
+                        background-color: #f1f8e9;
+                        color: var(--text-dark);
+                }
+
+                header {
+                        background-color: var(--primary-green);
+                        color: var(--text-light);
+                        padding: 20px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                }
+
+                header h1 {
+                        position: relative;
+                        z-index: 1;
+                        animation: slideInFromLeft 1s ease-out;
+                }
+
+                header::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+                        z-index: 0;
+                }
+
+                .breadcrumb {
+                        margin: 20px;
+                        animation: fadeIn 1s ease-out;
+                }
+
+                .breadcrumb a {
+                        color: var(--primary-green);
+                        text-decoration: none;
+                        transition: color var(--transition-speed);
+                }
+
+                .breadcrumb a:hover {
+                        color: var(--accent-green);
+                        text-decoration: underline;
+                }
+
+                .category-container {
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        padding: 20px;
+                }
+
+                .category-header {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 30px;
+                        animation: slideInFromRight 1s ease-out;
+                }
+
+                .category-icon {
+                        width: 64px;
+                        height: 64px;
+                        background-color: var(--light-green);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 20px;
+                        transition: transform var(--transition-speed);
+                }
+
+                .category-icon:hover {
+                        transform: scale(1.1);
+                        background-color: var(--accent-green);
+                }
+
+                .category-icon i {
+                        font-size: 30px;
+                        color: white;
+                }
+
+                .category-description {
+                        background-color: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        margin-bottom: 30px;
+                        line-height: 1.6;
+                        animation: fadeIn 1.5s ease-out;
+                }
+
+                .item-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                        gap: 20px;
+                }
+
+                .item-card {
+                        background-color: white;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+                        position: relative;
+                        animation: fadeIn 2s ease-out;
+                }
+
+                .item-card:nth-child(1) {
+                        animation-delay: 0.1s;
+                }
+
+                .item-card:nth-child(2) {
+                        animation-delay: 0.2s;
+                }
+
+                .item-card:nth-child(3) {
+                        animation-delay: 0.3s;
+                }
+
+                .item-card:nth-child(4) {
+                        animation-delay: 0.4s;
+                }
+
+                .item-card:nth-child(5) {
+                        animation-delay: 0.5s;
+                }
+
+                .item-card:nth-child(6) {
+                        animation-delay: 0.6s;
+                }
+
+                .item-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                }
+
+                .item-card img {
+                        width: 100%;
+                        height: 180px;
+                        object-fit: cover;
+                }
+
+                .item-content {
+                        padding: 15px;
+                }
+
+                .item-title {
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                        color: var(--primary-green);
+                }
+
+                .item-description {
+                        font-size: 14px;
+                        color: #666;
+                        margin-bottom: 15px;
+                }
+
+                .item-price {
+                        font-weight: bold;
+                        color: var(--dark-green);
+                }
+
+                .item-tag {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background-color: var(--accent-green);
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 20px;
+                        font-size: 12px;
+                        font-weight: bold;
+                        animation: pulse 2s infinite;
+                }
+
+                .view-more {
+                        display: block;
+                        text-align: center;
+                        margin: 30px auto;
+                        padding: 10px 20px;
+                        background-color: var(--primary-green);
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        transition: background-color var(--transition-speed);
+                        animation: fadeIn 2.5s ease-out;
+                }
+
+                .view-more:hover {
+                        background-color: var(--dark-green);
+                }
+
+                footer {
+                        background-color: var(--dark-green);
+                        color: var(--text-light);
+                        padding: 30px 20px;
+                        margin-top: 40px;
+                        text-align: center;
+                        animation: slideInFromBottom 1s ease-out;
+                }
+
+                @keyframes fadeIn {
+                        from {
+                                opacity: 0;
+                        }
+
+                        to {
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes slideInFromLeft {
+                        from {
+                                transform: translateX(-50px);
+                                opacity: 0;
+                        }
+
+                        to {
+                                transform: translateX(0);
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes slideInFromRight {
+                        from {
+                                transform: translateX(50px);
+                                opacity: 0;
+                        }
+
+                        to {
+                                transform: translateX(0);
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes slideInFromBottom {
+                        from {
+                                transform: translateY(30px);
+                                opacity: 0;
+                        }
+
+                        to {
+                                transform: translateY(0);
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes pulse {
+                        0% {
+                                transform: scale(1);
+                        }
+
+                        50% {
+                                transform: scale(1.05);
+                        }
+
+                        100% {
+                                transform: scale(1);
+                        }
+                }
+
+                @media (max-width: 768px) {
+                        .item-grid {
+                                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                        }
+                }
+
+                @media (max-width: 480px) {
+                        .item-grid {
+                                grid-template-columns: 1fr;
+                        }
+                }
+        </style>
+</head>
+
+<body>
+        <header>
+                <h1>Eco-Friendly Products</h1>
+        </header>
+
+        <div class="breadcrumb">
+                <a href="#">Home</a> &gt; <a href="#">Categories</a> &gt; <span>Eco-Friendly Products</span>
+        </div>
+
+        <div class="category-container">
+                <div class="category-header">
+                        <div class="category-icon">
+                                <i>🌱</i>
+                        </div>
+                        <h2>Explore Our Eco-Friendly Collection</h2>
+                </div>
+
+                <div class="category-description">
+                        <p>Our eco-friendly product line is designed with sustainability in mind. Each item is carefully
+                                selected to minimize environmental impact while maximizing functionality. From
+                                biodegradable materials to energy-efficient designs, our products help you make greener
+                                choices without compromising on quality.</p>
+                </div>
+
+                <div class="item-grid">
+                        <div class="item-card">
+                                <div class="item-tag">New</div>
+                                <img src="/api/placeholder/400/320" alt="Bamboo Utensil Set">
+                                <div class="item-content">
+                                        <h3 class="item-title">Bamboo Utensil Set</h3>
+                                        <p class="item-description">Portable and reusable bamboo utensils, perfect for
+                                                on-the-go meals.</p>
+                                        <p class="item-price">$14.99</p>
+                                </div>
+                        </div>
+
+                        <div class="item-card">
+                                <img src="/api/placeholder/400/320" alt="Recycled Glass Water Bottle">
+                                <div class="item-content">
+                                        <h3 class="item-title">Recycled Glass Water Bottle</h3>
+                                        <p class="item-description">24oz water bottle made from 100% recycled glass with
+                                                silicone sleeve.</p>
+                                        <p class="item-price">$18.99</p>
+                                </div>
+                        </div>
+
+                        <div class="item-card">
+                                <div class="item-tag">Popular</div>
+                                <img src="/api/placeholder/400/320" alt="Organic Cotton Tote">
+                                <div class="item-content">
+                                        <h3 class="item-title">Organic Cotton Tote</h3>
+                                        <p class="item-description">Durable tote bag made from organic cotton, perfect
+                                                for shopping.</p>
+                                        <p class="item-price">$12.99</p>
+                                </div>
+                        </div>
+
+                        <div class="item-card">
+                                <img src="/api/placeholder/400/320" alt="Beeswax Food Wraps">
+                                <div class="item-content">
+                                        <h3 class="item-title">Beeswax Food Wraps</h3>
+                                        <p class="item-description">Reusable food wraps made with organic cotton and
+                                                beeswax.</p>
+                                        <p class="item-price">$16.99</p>
+                                </div>
+                        </div>
+
+                        <div class="item-card">
+                                <img src="/api/placeholder/400/320" alt="Bamboo Toothbrush">
+                                <div class="item-content">
+                                        <h3 class="item-title">Bamboo Toothbrush</h3>
+                                        <p class="item-description">Biodegradable toothbrush with soft bristles and
+                                                bamboo handle.</p>
+                                        <p class="item-price">$4.99</p>
+                                </div>
+                        </div>
+
+                        <div class="item-card">
+                                <div class="item-tag">Sale</div>
+                                <img src="/api/placeholder/400/320" alt="Solar Power Bank">
+                                <div class="item-content">
+                                        <h3 class="item-title">Solar Power Bank</h3>
+                                        <p class="item-description">10,000mAh power bank with integrated solar charging
+                                                panel.</p>
+                                        <p class="item-price">$29.99</p>
+                                </div>
+                        </div>
+                </div>
+
+                <button class="view-more">View More Products</button>
+        </div>
+
+        <footer>
+                <p>&copy; 2025 Green Living. All rights reserved.</p>
+        </footer>
+</body>
+
+</html>
